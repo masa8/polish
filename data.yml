@@ -1,0 +1,24 @@
+- - c: '[4:]'
+    t: Ptak
+  - c: '[4:]'
+    t: Ptaka
+  - c: '[4:]'
+    t: ptakowi
+  - c: '[4:]'
+    t: Ptaka
+  - c: '[4:]'
+    t: Ptakiem
+  - c: '[4:]'
+    t: Ptaku
+- - c: '[3:]'
+    t: Ten
+  - c: '[2:]'
+    t: Tego
+  - c: '[2:]'
+    t: Temu
+  - c: '[6:]'
+    t: Ten/Tego
+  - c: '[2:]'
+    t: Tym
+  - c: '[2:]'
+    t: Tym
