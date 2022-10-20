@@ -5,6 +5,6 @@ media/
 venv/
 
 .DS_Store
-
+texput.log
 
 
