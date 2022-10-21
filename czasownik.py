@@ -25,34 +25,60 @@ class JęzykaPolskiego(Scene):
         return result, text, box_ja
 
     def construct(self):
-        czasownik = ['ja', 'my', 'ty', 'wy', 'on', 'ono', 'ona', 'oni', 'one', '']
-        czasownik2 = ['ja', 'my', 'ty', 'wy', 'on', 'ono', 'ona', 'oni', 'one', 'Ja jem jabłka.']
-        czasownik3 = ['Ja', 'my', 'ty', 'wy', 'on', 'ono', 'ona', 'oni', 'one', 'Ja jem jabłka.']
-        czasownik4 = ['jem', 'jemy', 'jesz', 'jecie', 'je', 'je', 'je', 'jedzą', 'jedzą', 'Ja jem jabłka.']
-        czasownik5 = ['', '', '', '', '', 'jabłko', '', '', 'jabłka', 'Ja jem jabłka.']
 
-        czasownik_apple = ['jabłko', 'jabłka', 'jabłku', 'jabłko', 'jabłkiem', 'jabłku', 'jabłko']
-        czasownik_apples = ['jabłka', 'jabłek', 'jabłkom', 'jabłka', 'jabłkami', 'jabłkach', 'jabłka']
-        czasowniks = []
-        czasowniks.append(czasownik_apples)
-        czasowniks.append(czasownik_apple)
+        czasownik_list = []
+        czasownik = {'words':['ja', 'my', 'ty', 'wy', 'on', 'ono', 'ona', 'oni', 'one', ''], 'indicate':None, 'fadeout':None}
+        czasownik2 = {'words':['ja', 'my', 'ty', 'wy', 'on', 'ono', 'ona', 'oni', 'one', 'Ja jem jabłka.'], 'indicate':9,'fadeout':None}
+        czasownik3 = {'words':['Ja', 'my', 'ty', 'wy', 'on', 'ono', 'ona', 'oni', 'one', 'Ja jem jabłka.'], 'indicate':0,'fadeout':None}
+        czasownik4 = {'words':['jem', 'jemy', 'jesz', 'jecie', 'je', 'je', 'je', 'jedzą', 'jedzą', 'Ja jem jabłka.'], 'indicate':0,'fadeout':None}
+        czasownik5 = {'words':['', '', '', '', '', 'jabłko', '', '', 'jabłka', 'Ja jem jabłka.'], 'indicate':None,'fadeout':[5,8]}
+        czasownik_list.append(czasownik)
+        czasownik_list.append(czasownik2)
+        czasownik_list.append(czasownik3)
+        czasownik_list.append(czasownik4)
+        czasownik_list.append(czasownik5)
 
-        self.zaimek(czasownik)
-        self.update_zaimek(czasownik2)
-        self.play(Indicate(self.uis[9]['txt']))
+        czasowniks, locations, loc_inds = [], [], []
+        czasownik_apple = {'czasownik':['jabłko', 'jabłka', 'jabłku', 'jabłko', 'jabłkiem', 'jabłku', 'jabłko'], 'location':5, 'indicate':None}
+        czasownik_apples = {'czasownik':['jabłka', 'jabłek', 'jabłkom', 'jabłka', 'jabłkami', 'jabłkach', 'jabłka'], 'location':8, 'indicate':True}
+        czasowniks.append(czasownik_apple['czasownik'])
+        czasowniks.append(czasownik_apples['czasownik'])
+        locations.append(czasownik_apple['location'])
+        locations.append(czasownik_apples['location'])
 
-        self.update_zaimek(czasownik3)
-        self.play(Indicate(self.uis[0]['txt']))
+        loc_inds.append({'location':czasownik_apple['location'], 'indicate':czasownik_apple['indicate']})
+        loc_inds.append({'location':czasownik_apples['location'], 'indicate':czasownik_apples['indicate']})
 
-        self.update_zaimek(czasownik4)
-        self.play(Indicate(self.uis[0]['txt']))
+        for i, page in enumerate(czasownik_list):
+            if i is 0:
+                self.zaimek(page['words'])
+                if page['indicate'] is not None:
+                    self.play(Indicate(self.uis[page['indicate']]['txt'], scale_factor=3),
+                              Flash(self.uis[page['indicate']]['txt'], num_lines=12, color=YELLOW))
+                if page['fadeout'] is not None:
+                    self.play(*[FadeOut(self.uis[ind]['txt']) for ind in page['fadeout']])
+            else:
 
-        self.update_zaimek(czasownik5)
-        self.play(FadeOut(self.uis[8]['txt']), FadeOut(self.uis[5]['txt']))
-        self.czasownik(czasowniks, [8, 5])
+                self.update_zaimek(page['words'])
+                if page['indicate'] is not None:
+                    self.play(Indicate(self.uis[page['indicate']]['txt'], scale_factor=3),
+                              Flash(self.uis[page['indicate']]['txt'], num_lines=12, color=YELLOW))
+                if page['fadeout'] is not None:
+                    self.play(*[FadeOut(self.uis[ind]['txt']) for ind in page['fadeout']])
 
-        self.play(FadeIn(self.uis[8]['txt'], shift=5 * LEFT), FadeIn(self.uis[5]['txt']))
-        self.play(Indicate(self.uis[8]['txt']))
+        self.czasownik(czasowniks, locations)
+
+        fadeins, indflush = [],[]
+        for li in loc_inds:
+            if li['indicate'] is not None:
+                fadeins.append(FadeIn(self.uis[li['location']]['txt'], shift=5 * LEFT))
+                indflush.append(Indicate(self.uis[li['location']]['txt'], scale_factor=3))
+                indflush.append(Flash(self.uis[li['location']]['txt'], num_lines=12, color=YELLOW))
+            else:
+                FadeIn(self.uis[li['location']]['txt'])
+        self.play(*fadeins)
+
+        self.play(*indflush)
 
     def czasownik(self, czasowniks, locations):
 
@@ -61,15 +87,19 @@ class JęzykaPolskiego(Scene):
             apples = [Text(item[i]).move_to(self.uis[location]['box'].get_center()) for i in range(7)]
             apples_list.append(apples)
 
-        for i, label in enumerate([{'scale': 10, 'shift': 2 * DL},
-                                   {'scale': 10, 'shift': 2 * DOWN},
-                                   {'scale': 10, 'shift': 2 * RIGHT},
-                                   {'scale': 10, 'shift': 2 * LEFT},
-                                   {'scale': 10, 'shift': 2 * UP},
-                                   {'scale': 10, 'shift': 2 * UR},
-                                   {'scale': 10, 'shift': 2 * UL},
-                                   ]):
-            self.play(*[FadeIn(apples_list[j][i], shift=label['shift'], run_time=0.3) for j in range(len(apples_list))])
+        effects = [{'scale': 3, 'shift': 5 * DL},
+                   {'scale': 3, 'shift': 5 * DOWN},
+                   {'scale': 3, 'shift': 5 * RIGHT},
+                   {'scale': 3, 'shift': 5 * LEFT},
+                   {'scale': 3, 'shift': 5 * UP},
+                   {'scale': 3, 'shift': 5 * UR},
+                   {'scale': 3, 'shift': 5 * UL},
+                   ]
+        for i, label in enumerate(effects):
+            self.play(AnimationGroup(
+                *[FadeIn(apples_list[j][i], scale=label['scale'], shift=label['shift'], run_time=0.3) for j in
+                  range(len(apples_list))], lag_ratio=0.2))
+
             self.play(*[FadeOut(apples_list[j][i], run_time=0.1) for j in range(len(apples_list))])
 
     def zaimek(self, czasownik):
