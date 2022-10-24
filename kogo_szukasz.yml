@@ -1,0 +1,39 @@
+changes:
+- czasownik:
+    mianownik: "kto"
+    dopełniacz: "kogo"
+    celownik: "komu"
+    biernik: "kogo"
+    narzędnik: "kim"
+    miejscownik: "kim"
+    wołacz: ""
+  indicate: "biernik"
+  location: 4
+pages:
+- fadeout: null
+  indicate: 9
+  words:
+  - ja
+  - my
+  - ty
+  - wy
+  - 'on'
+  - ono
+  - ona
+  - oni
+  - one
+  - "Kogo szukasz?"
+- fadeout:
+  - 4
+  indicate: null
+  words:
+  - ''
+  - ''
+  - ''
+  - ''
+  - 'Kogo'
+  - ""
+  - ''
+  - ''
+  - ""
+  - "Kogo szukasz?"

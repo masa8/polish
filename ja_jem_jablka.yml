@@ -1,0 +1,89 @@
+changes:
+- czasownik:
+  - "jab\u0142ko"
+  - "jab\u0142ka"
+  - "jab\u0142ku"
+  - "jab\u0142ko"
+  - "jab\u0142kiem"
+  - "jab\u0142ku"
+  - "jab\u0142ko"
+  indicate: null
+  location: 5
+- czasownik:
+  - "jab\u0142ka"
+  - "jab\u0142ek"
+  - "jab\u0142kom"
+  - "jab\u0142ka"
+  - "jab\u0142kami"
+  - "jab\u0142kach"
+  - "jab\u0142ka"
+  indicate: "LEFT"
+  location: 8
+pages:
+- fadeout: null
+  indicate: null
+  words:
+  - ja
+  - my
+  - ty
+  - wy
+  - 'on'
+  - ono
+  - ona
+  - oni
+  - one
+  - ''
+- fadeout: null
+  indicate: 9
+  words:
+  - ja
+  - my
+  - ty
+  - wy
+  - 'on'
+  - ono
+  - ona
+  - oni
+  - one
+  - "Ja jem jab\u0142ka."
+- fadeout: null
+  indicate: 0
+  words:
+  - Ja
+  - my
+  - ty
+  - wy
+  - 'on'
+  - ono
+  - ona
+  - oni
+  - one
+  - "Ja jem jab\u0142ka."
+- fadeout: null
+  indicate: 0
+  words:
+  - jem
+  - jemy
+  - jesz
+  - jecie
+  - je
+  - je
+  - je
+  - "jedz\u0105"
+  - "jedz\u0105"
+  - "Ja jem jab\u0142ka."
+- fadeout:
+  - 5
+  - 8
+  indicate: null
+  words:
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - "jab\u0142ko"
+  - ''
+  - ''
+  - "jab\u0142ka"
+  - "Ja jem jab\u0142ka."

@@ -1,0 +1,39 @@
+changes:
+- czasownik:
+    mianownik: "ty"
+    dopełniacz: "ciebie"
+    celownik: "tobie"
+    biernik: "ciebie"
+    narzędnik: "tobą"
+    miejscownik: "tobie"
+    wołacz: "ty"
+  indicate: "narzędnik"
+  location: 2
+pages:
+- fadeout: null
+  indicate: 9
+  words:
+  - ja
+  - my
+  - ty
+  - wy
+  - 'on'
+  - ono
+  - ona
+  - oni
+  - one
+  - "Z tobą"
+- fadeout:
+  - 2
+  indicate: null
+  words:
+  - ''
+  - ''
+  - 'tobą'
+  - ''
+  - ''
+  - ""
+  - ''
+  - ''
+  - ""
+  - "Z tobą"

@@ -1,0 +1,39 @@
+changes:
+- czasownik:
+    mianownik: "który"
+    dopełniacz: "którego"
+    celownik: "któremu"
+    biernik: "którego"
+    narzędnik: "którym"
+    miejscownik: "którym"
+    wołacz: "który"
+  indicate: "dopełniacz"
+  location: 4
+pages:
+- fadeout: null
+  indicate: 9
+  words:
+  - ja
+  - my
+  - ty
+  - wy
+  - 'on'
+  - ono
+  - ona
+  - oni
+  - one
+  - "którego widelec?"
+- fadeout:
+  - 4
+  indicate: null
+  words:
+  - ''
+  - ''
+  - ''
+  - ''
+  - 'którego'
+  - ""
+  - ''
+  - ''
+  - ""
+  - "którego widelec?"

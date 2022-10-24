@@ -1,0 +1,39 @@
+changes:
+- czasownik:
+    mianownik: "ja"
+    dopełniacz: "mnie"
+    celownik: "mnie"
+    biernik: "mnie"
+    narzędnik: "mną"
+    miejscownik: "mnie"
+    wołacz: "ja"
+  indicate: "narzędnik"
+  location: 0
+pages:
+- fadeout: null
+  indicate: 9
+  words:
+  - ja
+  - my
+  - ty
+  - wy
+  - 'on'
+  - ono
+  - ona
+  - oni
+  - one
+  - "Z mną"
+- fadeout:
+  - 0
+  indicate: null
+  words:
+  - 'mną'
+  - ''
+  - ''
+  - ''
+  - ''
+  - ""
+  - ''
+  - ''
+  - ""
+  - "Z mną"

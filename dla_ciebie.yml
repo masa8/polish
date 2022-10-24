@@ -1,0 +1,52 @@
+changes:
+- czasownik:
+  - "ty"
+  - "ciebie"
+  - "tobie"
+  - "ciebie"
+  - "tobą"
+  - "tobie"
+  - "ty"
+  indicate: "dopełniacz"
+  location: 2
+pages:
+- fadeout: null
+  indicate: null
+  words:
+  - ja
+  - my
+  - ty
+  - wy
+  - 'on'
+  - ono
+  - ona
+  - oni
+  - one
+  - ''
+- fadeout: null
+  indicate: 9
+  words:
+  - ja
+  - my
+  - ty
+  - wy
+  - 'on'
+  - ono
+  - ona
+  - oni
+  - one
+  - "Dla ciebie"
+- fadeout:
+  - 2
+  indicate: null
+  words:
+  - ''
+  - ''
+  - 'ciebie'
+  - ''
+  - ''
+  - ""
+  - ''
+  - ''
+  - ""
+  - "Dla ciebie"

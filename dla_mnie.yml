@@ -1,0 +1,52 @@
+changes:
+- czasownik:
+  - "ja"
+  - "mnie"
+  - "mnie"
+  - "mnie"
+  - "mną"
+  - "mnie"
+  - "ja"
+  indicate: "dopełniacz"
+  location: 0
+pages:
+- fadeout: null
+  indicate: null
+  words:
+  - ja
+  - my
+  - ty
+  - wy
+  - 'on'
+  - ono
+  - ona
+  - oni
+  - one
+  - ''
+- fadeout: null
+  indicate: 9
+  words:
+  - ja
+  - my
+  - ty
+  - wy
+  - 'on'
+  - ono
+  - ona
+  - oni
+  - one
+  - "Dla mnie"
+- fadeout:
+  - 0
+  indicate: null
+  words:
+  - 'mnie'
+  - ''
+  - ''
+  - ''
+  - ''
+  - ""
+  - ''
+  - ''
+  - ""
+  - "Dla mnie"

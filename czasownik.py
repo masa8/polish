@@ -1,4 +1,7 @@
 from manim import *
+import yaml
+
+
 
 
 class JęzykaPolskiego(Scene):
@@ -26,31 +29,38 @@ class JęzykaPolskiego(Scene):
 
     def construct(self):
 
-        czasownik_list = []
-        czasownik = {'words':['ja', 'my', 'ty', 'wy', 'on', 'ono', 'ona', 'oni', 'one', ''], 'indicate':None, 'fadeout':None}
-        czasownik2 = {'words':['ja', 'my', 'ty', 'wy', 'on', 'ono', 'ona', 'oni', 'one', 'Ja jem jabłka.'], 'indicate':9,'fadeout':None}
-        czasownik3 = {'words':['Ja', 'my', 'ty', 'wy', 'on', 'ono', 'ona', 'oni', 'one', 'Ja jem jabłka.'], 'indicate':0,'fadeout':None}
-        czasownik4 = {'words':['jem', 'jemy', 'jesz', 'jecie', 'je', 'je', 'je', 'jedzą', 'jedzą', 'Ja jem jabłka.'], 'indicate':0,'fadeout':None}
-        czasownik5 = {'words':['', '', '', '', '', 'jabłko', '', '', 'jabłka', 'Ja jem jabłka.'], 'indicate':None,'fadeout':[5,8]}
-        czasownik_list.append(czasownik)
-        czasownik_list.append(czasownik2)
-        czasownik_list.append(czasownik3)
-        czasownik_list.append(czasownik4)
-        czasownik_list.append(czasownik5)
+        data = {}
 
-        czasowniks, locations, loc_inds = [], [], []
-        czasownik_apple = {'czasownik':['jabłko', 'jabłka', 'jabłku', 'jabłko', 'jabłkiem', 'jabłku', 'jabłko'], 'location':5, 'indicate':None}
-        czasownik_apples = {'czasownik':['jabłka', 'jabłek', 'jabłkom', 'jabłka', 'jabłkami', 'jabłkach', 'jabłka'], 'location':8, 'indicate':True}
-        czasowniks.append(czasownik_apple['czasownik'])
-        czasowniks.append(czasownik_apples['czasownik'])
-        locations.append(czasownik_apple['location'])
-        locations.append(czasownik_apples['location'])
+        # czasownik_list = []
+        # czasownik = {'words':['ja', 'my', 'ty', 'wy', 'on', 'ono', 'ona', 'oni', 'one', ''], 'indicate':None, 'fadeout':None}
+        # czasownik2 = {'words':['ja', 'my', 'ty', 'wy', 'on', 'ono', 'ona', 'oni', 'one', 'Ja jem jabłka.'], 'indicate':9,'fadeout':None}
+        # czasownik3 = {'words':['Ja', 'my', 'ty', 'wy', 'on', 'ono', 'ona', 'oni', 'one', 'Ja jem jabłka.'], 'indicate':0,'fadeout':None}
+        # czasownik4 = {'words':['jem', 'jemy', 'jesz', 'jecie', 'je', 'je', 'je', 'jedzą', 'jedzą', 'Ja jem jabłka.'], 'indicate':0,'fadeout':None}
+        # czasownik5 = {'words':['', '', '', '', '', 'jabłko', '', '', 'jabłka', 'Ja jem jabłka.'], 'indicate':None,'fadeout':[5,8]}
+        # czasownik_list.append(czasownik)
+        # czasownik_list.append(czasownik2)
+        # czasownik_list.append(czasownik3)
+        # czasownik_list.append(czasownik4)
+        # czasownik_list.append(czasownik5)
+        # data['pages']=czasownik_list
+        #
+        # apple = []
+        # czasownik_apple = {'czasownik':['jabłko', 'jabłka', 'jabłku', 'jabłko', 'jabłkiem', 'jabłku', 'jabłko'], 'location':5, 'indicate':None}
+        # czasownik_apples = {'czasownik':['jabłka', 'jabłek', 'jabłkom', 'jabłka', 'jabłkami', 'jabłkach', 'jabłka'], 'location':8, 'indicate':True}
+        # apple.append(czasownik_apple)
+        # apple.append(czasownik_apples)
+        # data['changes'] = apple
+        give_file = input("enter a file name: ")
 
-        loc_inds.append({'location':czasownik_apple['location'], 'indicate':czasownik_apple['indicate']})
-        loc_inds.append({'location':czasownik_apples['location'], 'indicate':czasownik_apples['indicate']})
+        with open(give_file, 'r') as stream:
+            data = yaml.safe_load(stream)
 
-        for i, page in enumerate(czasownik_list):
-            if i is 0:
+        czasowniks, locations = [], []
+        czasowniks.extend([list(i['czasownik'].values()) for i in data['changes']])
+        locations.extend([i['location'] for i in data['changes']])
+
+        for i, page in enumerate(data['pages']):
+            if i == 0:
                 self.zaimek(page['words'])
                 if page['indicate'] is not None:
                     self.play(Indicate(self.uis[page['indicate']]['txt'], scale_factor=3),
@@ -69,9 +79,12 @@ class JęzykaPolskiego(Scene):
         self.czasownik(czasowniks, locations)
 
         fadeins, indflush = [],[]
-        for li in loc_inds:
+        for li in data['changes']:
             if li['indicate'] is not None:
-                fadeins.append(FadeIn(self.uis[li['location']]['txt'], shift=5 * LEFT))
+
+                direction: np.array = self.resolve_direction(li['indicate'] )
+                print(direction, self.uis[li['location']]['txt'])
+                fadeins.append(FadeIn(self.uis[li['location']]['txt'], shift=5*direction))
                 indflush.append(Indicate(self.uis[li['location']]['txt'], scale_factor=3))
                 indflush.append(Flash(self.uis[li['location']]['txt'], num_lines=12, color=YELLOW))
             else:
@@ -87,13 +100,13 @@ class JęzykaPolskiego(Scene):
             apples = [Text(item[i]).move_to(self.uis[location]['box'].get_center()) for i in range(7)]
             apples_list.append(apples)
 
-        effects = [{'scale': 3, 'shift': 5 * DL},
-                   {'scale': 3, 'shift': 5 * DOWN},
-                   {'scale': 3, 'shift': 5 * RIGHT},
-                   {'scale': 3, 'shift': 5 * LEFT},
-                   {'scale': 3, 'shift': 5 * UP},
-                   {'scale': 3, 'shift': 5 * UR},
-                   {'scale': 3, 'shift': 5 * UL},
+        effects = [{'scale': 1, 'shift': 5 * DL},
+                   {'scale': 1, 'shift': 5 * DOWN},
+                   {'scale': 1, 'shift': 5 * RIGHT},
+                   {'scale': 1, 'shift': 5 * LEFT},
+                   {'scale': 1, 'shift': 5 * UP},
+                   {'scale': 1, 'shift': 5 * UR},
+                   {'scale': 1, 'shift': 5 * UL},
                    ]
         for i, label in enumerate(effects):
             self.play(AnimationGroup(
@@ -188,6 +201,9 @@ class JęzykaPolskiego(Scene):
         ga = VGroup(g1, g2, g3, g4, gt).arrange(UP)
         self.play(Write(ga), run_time=0.5)
 
+    def resolve_direction(self, direction_string) -> np.ndarray:
+        direct_dict = {'mianownik': DL, "dopełniacz": DOWN, "celownik": RIGHT, "biernik": LEFT, "narzędnik": UP, "miejscownik": UR, "wołacz": UL}
+        return direct_dict[direction_string]
     def update_zaimek(self, czasownik):
         txts = [Text(czasownik[i]).move_to(self.uis[i]['box'].get_center()) for i in range(0, 10)]
         self.play(*[Transform(self.uis[i]['txt'], target_mobject=txts[i]) for i in range(0, 10)])
